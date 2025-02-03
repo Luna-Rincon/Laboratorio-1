@@ -1,1 +1,4 @@
-# An-lisis-estad-stico-de-la-se-al-
+# Analisis estadisrtico de una señal
+
+# Descripción
+Este repositorio contiene el código para medir los estadisticos de una señal 
