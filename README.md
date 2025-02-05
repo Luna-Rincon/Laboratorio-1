@@ -51,5 +51,44 @@ plt.grid(True, linestyle="--", alpha=0.7)
 plt.legend(fontsize=12)
 plt.savefig("semg_RT_HAM.png", dpi=300, bbox_inches='tight')
 ```
+### Gráfica Original
 ![Serie de Tiempo sEMG RT HAM](semg_RT_HAM.png)
-Se observa que hay picos tanto positivos como negativos, lo que puede corresponder a la activación y relajación de los músculos.La persona realizó contracciones musculares por tanto estos cambios en amplitud reflejan la actividad eléctrica del músculo.
+
+
+* Se observa que hay picos tanto positivos como negativos, lo que puede corresponder a la activación y relajación de los músculos.
+* La persona realizó contracciones musculares por tanto estos cambios en amplitud reflejan la actividad eléctrica del músculo.
+## Estadísticos descriptivos
+Para realizar los analisis se hacen los calculos tanto manuales como por funciones predeterminadas como se indica en los comentarios del codigo.
+```python
+#CALCULO DE MEDIA
+suma_total=0
+media=0
+for c in df_rt['semg RT HAM']:
+    suma_total +=c
+media=suma_total/len(df_rt['semg RT HAM']) #Manual
+print("Media= " +str(media)) #STR ES PARA CONVERTIR A STRING
+np.mean(df_rt['semg RT HAM'])#Con función
+
+#CALCULO PARA DESVIACION ESTANDAR
+# Cálculo de las diferencias cuadradas
+diferencia = [(x - media) ** 2 for x in df_rt['semg RT HAM']]
+# Sumar las diferencias cuadradas
+sumatoria_diferencia = sum(diferencia)
+# Calcular la varianza (muestral)
+varianza = sumatoria_diferencia / (len(df_rt['semg RT HAM']) - 1)
+# Calcular la desviación estándar
+desviacion = varianza ** 0.5 #Manual
+print("Varianza: " + str(varianza))
+print("Desviación estándar: " + str(desviacion))
+
+np.std(df_rt['semg RT HAM'])#Con funcion
+
+#CALCULO COEFICIENTE DE VARIACION
+cv=(desviacion/media)*100
+print("Coeficiente de variación= "+str (cv))
+```
+**Resultados**
+| Media | Desviación Estandar  | Varianza | Coeficiente Variación|
+|:-------:|:-----------------:|:----------:|:-----------------:|
+| 1.956 |      16.347     | 267.237  |       835.349   |
+
