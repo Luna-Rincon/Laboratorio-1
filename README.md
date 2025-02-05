@@ -29,7 +29,7 @@ import numpy as np
 ```
 >Tener en cuenta qué para leer el Archivo descargado del repositorio el directorio debe de tener los archivos .DAT y .HEA debio a que sin alguno de los dos la lectura fallará. Se recomienda tenerlos en la carpeta en donde está el Script de Python para no tener que buscarla por todo el equipo.
 >
-Seguido a eso se extrae el documentoy con ayuda de la libreria de pandas se hace un DataFrame para visualizar mejor los datos del documento.
+Seguido a eso se extrae el documento y con ayuda de la libreria de pandas se hace un DataFrame para visualizar mejor los datos del documento.
 ```python
 record = wfdb.rdrecord('S01') #Exportar documento
 frecuencia = 2000 #Dada en el documento 
@@ -67,7 +67,9 @@ for c in df_rt['semg RT HAM']:
     suma_total +=c
 media=suma_total/len(df_rt['semg RT HAM']) #Manual
 print("Media= " +str(media)) #STR ES PARA CONVERTIR A STRING
-np.mean(df_rt['semg RT HAM'])#Con función
+
+#Con función
+np.mean(df_rt['semg RT HAM'])
 
 #CALCULO PARA DESVIACION ESTANDAR
 # Cálculo de las diferencias cuadradas
@@ -81,7 +83,8 @@ desviacion = varianza ** 0.5 #Manual
 print("Varianza: " + str(varianza))
 print("Desviación estándar: " + str(desviacion))
 
-np.std(df_rt['semg RT HAM'])#Con funcion
+#Con funcion
+np.std(df_rt['semg RT HAM'])
 
 #CALCULO COEFICIENTE DE VARIACION
 cv=(desviacion/media)*100
@@ -92,3 +95,16 @@ print("Coeficiente de variación= "+str (cv))
 |:-------:|:-----------------:|:----------:|:-----------------:|
 | 1.956 |      16.347     | 267.237  |       835.349   |
 
+Posterior a estos resultados, se realizó el histograma de la siguiente manera:
+```python
+# HISTOGRAMA
+columna = 'semg RT HAM'
+plt.figure(figsize=(8, 4))
+plt.hist(df_01[columna], bins=30, alpha=0.7, color='blue', edgecolor='black')
+plt.title(f'Histograma de {columna}')
+plt.xlabel('Valor')
+plt.ylabel('Frecuencia')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show()
+```
+Obteniendo la siguiente grafica:
