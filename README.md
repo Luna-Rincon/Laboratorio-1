@@ -6,14 +6,12 @@ la señal desde una base de datos, llamada physionet, se procesa y se implementa
 
 ## Tener en cuenta:
 1. El sujeto caminó sobre un terreno llano durante 5 minutos a su velocidad y ritmo naturales.
-2. Las señales sEMG se adquiere del musculo isquiotibiales (Ham).
-3. Todas las señales se registran con una frecuencia de muestreo de 2 kHz.
+2. Las señales sEMG se adquiere del musculo isquiotibiales (**Ham**).
+3. Todas las señales se registran con una frecuencia de muestreo de **2 kHz**.
 4. Se debe instalar las librerias:
    + Wfdb.
    + Numpy.
    + Pandas.
-   + Matplotlib
+   + Matplotlib.
 
-   
-6. 
  
