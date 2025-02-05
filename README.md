@@ -29,7 +29,7 @@ import numpy as np
 ```
 >Tener en cuenta qué para leer el Archivo descargado del repositorio el directorio debe de tener los archivos .DAT y .HEA debio a que sin alguno de los dos la lectura fallará. Se recomienda tenerlos en la carpeta en donde está el Script de Python para no tener que buscarla por todo el equipo.
 >
-Seguido a eso se extrae el documento, ayuda de la libreria de pandas se hace un DataFrame para visualizar mejor los datos del documento.
+Seguido a eso se extrae el documentoy con ayuda de la libreria de pandas se hace un DataFrame para visualizar mejor los datos del documento.
 ```python
 record = wfdb.rdrecord('S01') #Exportar documento
 frecuencia = 2000 #Dada en el documento 
@@ -39,5 +39,17 @@ df_rt=df_01[['semg RT HAM']]
 if len(tiempo) == len(df_rt):
     # Agregar la columna de tiempo al DataFrame
     df_rt["Tiempo (s)"] = tiempo
-```
 
+plt.figure(figsize=(17, 10))  # Configura el tamaño del gráfico
+# Graficar la señal "semg RT HAM" en función del tiempo
+plt.plot(df_rt["Tiempo (s)"], df_rt["semg RT HAM"], label="semg RT HAM", color="pink")
+plt.title("Serie de Tiempo: sEMG RT HAM", fontsize=16)
+plt.xlabel("Tiempo (s)", fontsize=14)
+plt.ylabel("Amplitud (mV)", fontsize=14)
+# Agregar una rejilla y la leyenda
+plt.grid(True, linestyle="--", alpha=0.7)
+plt.legend(fontsize=12)
+plt.savefig("semg_RT_HAM.png", dpi=300, bbox_inches='tight')
+```
+![Serie de Tiempo sEMG RT HAM](semg_RT_HAM.png)
+Se observa que hay picos tanto positivos como negativos, lo que puede corresponder a la activación y relajación de los músculos.La persona realizó contracciones musculares por tanto estos cambios en amplitud reflejan la actividad eléctrica del músculo.
