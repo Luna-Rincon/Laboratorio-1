@@ -95,16 +95,41 @@ print("Coeficiente de variación= "+str (cv))
 |:-------:|:-----------------:|:----------:|:-----------------:|
 | 1.956 |      16.347     | 267.237  |       835.349   |
 
-Posterior a estos resultados, se realizó el histograma de la siguiente manera:
+Posterior a estos resultados, se realizó el histograma con la funcion de probabilidad de la siguiente manera:
 ```python
 # HISTOGRAMA
-columna = 'semg RT HAM'
+# Datos de la columna (eliminamos NaN)
+data = df_01[columna].dropna()
+# Crear la figura
 plt.figure(figsize=(8, 4))
-plt.hist(df_01[columna], bins=30, alpha=0.7, color='blue', edgecolor='black')
-plt.title(f'Histograma de {columna}')
-plt.xlabel('Valor')
-plt.ylabel('Frecuencia')
+
+# Graficar el histograma con Pandas (sin normalización)
+ax = df_01[columna].hist(bins=30, alpha=0.7, color='blue', edgecolor='black', density=False, label='Histograma')
+
+# Calcular histograma normalizado para la PDF
+counts, bins = np.histogram(data, bins=30, density=True)
+
+# Calcular centros de bins
+bin_centers = (bins[:-1] + bins[1:]) / 2
+
+# Graficar la función de densidad de probabilidad (PDF) sobre el histograma
+ax2 = ax.twinx()  # Crear segundo eje para PDF
+ax2.plot(bin_centers, counts, marker='o', linestyle='-', color='red', label='PDF')
+
+# Etiquetas
+ax.set_xlabel('Valor')
+ax.set_ylabel('Frecuencia', color='blue')
+ax2.set_ylabel('Densidad de Probabilidad', color='red')
+
+# Agregar leyendas
+ax.legend(loc='upper left')
+ax2.legend(loc='upper right')
+
+# Mostrar la gráfica
+plt.title(f'Histograma y PDF de {columna}')
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.show()
 ```
 Obteniendo la siguiente grafica:
+### Gráfica Original
+![Histograma y PDF de semg RT HAM](Histograma y PDF de semg RT HAM.png)
