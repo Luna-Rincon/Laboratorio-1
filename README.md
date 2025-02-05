@@ -132,4 +132,4 @@ plt.show()
 ```
 Obteniendo la siguiente grafica:
 ### Gráfica Original
-![Histograma y PDF de semg RT HAM](Histograma y PDF de semg RT HAM.png)
+![Histograma y PDF de semg RT HAM](Histograma_y_pdf_de_sEmg.png)
