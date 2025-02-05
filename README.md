@@ -100,7 +100,7 @@ print("Coeficiente de variación= "+str (cv))
 
 
 
-Posterior a estos resultados, se realizó el histograma con la funcion de probabilidad de la siguiente manera:
+Posterior a estos resultados, se realizó el histograma con la función de probabilidad de la siguiente manera:
 ```python
 # HISTOGRAMA
 # Datos de la columna (eliminamos NaN)
@@ -137,6 +137,7 @@ plt.show()
 ```
 Obteniendo lo siguiente :
 ![Histograma y PDF de semg RT HAM](Histograma_y_pdf_de_sEmg.png)
+<br><em>Figura 2: Histograma con función de probabilidad de la señal sEMG RT HAM .</em></p>
 
 ### SNR 
 
@@ -166,8 +167,8 @@ plt.grid(True, linestyle="--", alpha=0.7)
 plt.show()
 
 ```
-![Serie de Tiempo sEMG RT HAM](semg_RT_HAM.png)
-<br><em>Figura 1: señal sEMG RT HAM en función del tiempo .</em></p>
+![Ruido Gaussiano](ruido_gaussiano.png)
+<br><em>Figura 3: señal original con Ruido Gaussiano  .</em></p>
 
 
  2.Ruido de impulso
@@ -197,15 +198,11 @@ plt.title("Señal con ruido de Impulso")
 plt.grid(True, linestyle="--", alpha=0.7)
 plt.show()
 ```
-grafica
-```python
+![Ruido de Impulso](ruido_de_impulso.png)
+<br><em>Figura 4: señal original con Ruido de Impulso  .</em></p>
 
-```
  3. Ruido de tipo de artefacto 
-```python
 
-```
-grafica
 ```python
 # Copia de la señal original
 señal3 = df_rt['semg RT HAM'].values  
@@ -245,6 +242,9 @@ plt.title("Señal con ruido tipo Artefacto")
 plt.grid(True, linestyle="--", alpha=0.7)
 plt.show()
 ```
+![Ruido de Artefacto](ruido_artefacto.png)
+<br><em>Figura 3: señal original con Ruido de Artefacto  .</em></p>
+
  4. Ruido uniforme
 ```python
 # Copia de la señal original
@@ -271,10 +271,9 @@ plt.title("Señal con ruido Uniforme")
 plt.grid(True, linestyle="--", alpha=0.7)
 plt.show()
 ```
-grafica
-```python
+![Ruido Uniforme](ruido_uniforme.png)
+<br><em>Figura 5: señal original con Ruido Uniforme  .</em></p>
 
-```
  5.Ruido exponencial
 ```python
 # Copia de la señal original
@@ -301,10 +300,9 @@ plt.title("Señal con ruido Exponencial")
 plt.grid(True, linestyle="--", alpha=0.7)
 plt.show()
 ```
-grafica
-```python
+![Ruido Exponencial](ruido_exponencial.png)
+<br><em>Figura 6: señal original con Ruido Exponencial .</em></p>
 
-```
  6. Ruido flicker 1/F
 ```python
 # Copia de la señal original
@@ -337,7 +335,8 @@ plt.title("Señal con ruido de Flicker (1/f)")
 plt.grid(True, linestyle="--", alpha=0.7)
 plt.show()
 ```
-grafica
+![Ruido Flicker](ruido_flicker.png)
+<br><em>Figura 7: señal original con Ruido Flicker  .</em></p>
 
 A partir de lo anterior, se calculó el SNR de cada uno de los ruido de la siguiente manera 
 ```python
