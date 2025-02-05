@@ -95,6 +95,8 @@ print("Coeficiente de variación= "+str (cv))
 |:-------:|:-----------------:|:----------:|:-----------------:|
 | 1.956 |      16.347     | 267.237  |       835.349   |
 
+
+
 Posterior a estos resultados, se realizó el histograma con la funcion de probabilidad de la siguiente manera:
 ```python
 # HISTOGRAMA
@@ -130,6 +132,99 @@ plt.title(f'Histograma y PDF de {columna}')
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.show()
 ```
-Obteniendo la siguiente grafica:
-### Gráfica Original
+Obteniendo lo siguiente :
 ![Histograma y PDF de semg RT HAM](Histograma_y_pdf_de_sEmg.png)
+
+### SNR 
+
+Se contamina la señal con  6 tipos de ruidos diferentes para medir la relación señal ruido. Esto es debido a que la SNR es relevante en la interpretacion de señales biomedicas ya que compara entre el nivel de un detalle deseado (la señal) y el nivel de detalles no deseados, generalmente interferencias o distorsiones (el ruido).La SNR es un indicador de calidad de la señal, donde un mayor valor sugiere una mejor calidad de la información obtenida, mientras que un valor menor podría indicar una dificultad para comprender la señal de interés del ruido de fondo[¹](#1).
+
+#1. Ruido Gaussiano
+```python
+# Copia de la señal original
+señal = df_rt['semg RT HAM'].values  
+
+# Generación de ruido Gaussiano
+rgauss = np.random.normal(0, 0.05, len(señal))  
+señalruidog = señal + rgauss  
+
+# Agregar al DataFrame sin warning
+df_rt.loc[:, 'Rgaussiano'] = señalruidog  
+
+# Graficar
+plt.figure(figsize=(10, 4))
+plt.plot(señalruidog, label="Señal + Ruido Gaussiano", alpha=0.4)
+plt.legend()
+plt.title("Señal con ruido Gaussiano")
+
+# Agregar rejilla
+plt.grid(True, linestyle="--", alpha=0.7)
+plt.show()
+
+```
+grafica
+A partir de esto se calculo el SNR  con el siguiente código:
+```python
+# Calcular la potencia de la señal y del ruido
+P_señal = np.mean(señalruidog ** 2)  # Potencia de la señal
+P_ruido = np.mean(rgauss ** 2)   # Potencia del ruido
+
+# Calcular SNR en decibeles (dB)
+SNRGauss = 10 * np.log10(P_señal / P_ruido)
+print("SNR señal ruido Gauss: " + str(SNRGauss) + " dB") 
+```
+
+#2.
+```python
+
+```
+grafica
+```python
+
+```
+#3.
+```python
+
+```
+grafica
+```python
+
+```
+#4.
+```python
+
+```
+grafica
+```python
+
+```
+#5.
+```python
+
+```
+grafica
+```python
+
+```
+#6.
+```python
+
+```
+grafica
+```python
+
+```
+
+
+
+
+
+
+
+
+## Referencias
+
+1.Qué es Señal-Ruido. Diccionario Médico. Clínica U. Navarra. (n.d.).https://www.cun.es. Retrieved February 5, 2025, from https://www.cun.es/diccionario-medico/terminos/senal-ruido [¹](https://www.cun.es/diccionario-medico/terminos/senal-ruido) 
+
+
+
