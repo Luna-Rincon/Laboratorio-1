@@ -141,12 +141,17 @@ Obteniendo lo siguiente :
 
 <br><em>Figura 2: Histograma con función de probabilidad de la señal sEMG RT HAM .</em></p>
 
-### SNR 
+## Relación señal/ruido 
 
-Se contamina la señal con diferentes tipos de ruidos diferentes para medir la relación señal ruido. Esto es debido a que la SNR es relevante en la interpretacion de señales biomedicas ya que compara entre el nivel de un detalle deseado (la señal) y el nivel de detalles no deseados, generalmente interferencias o distorsiones (el ruido).La SNR es un indicador de calidad de la señal, donde un mayor valor sugiere una mejor calidad de la información obtenida, mientras que un valor menor podría indicar una dificultad para comprender la señal de interés del ruido de fondo[¹](#1).
+Se contamina la señal con diferentes tipos de ruidos diferentes para medir la relación señal ruido. Esto es debido a que la SNR es relevante en la interpretación de señales biomedicas ya que compara entre el nivel de un detalle deseado (la señal) y el nivel de detalles no deseados, generalmente interferencias o distorsiones (el ruido).La SNR es un indicador de calidad de la señal, donde un mayor valor sugiere una mejor calidad de la información obtenida, mientras que un valor menor podría indicar una dificultad para comprender la señal de interés del ruido de fondo[¹](#1).Por otra parte, la SNR es igual a la relacion entre la intensidad promedio de la señla y la desviacion estandar el ruido.[2]
+
 Se utilizaron 3 tipos de ruidos diferentes, en cada uno de estos se graficó dos veces la señal con una amplitud alta y una amplitud baja como se observa a continuación 
 
  1. Ruido Gaussiano bajo
++ Primero, se extrae la columna del data frame y se convierten los valores a un arreglo con *.values*, el cual se va a llamar señal
++ Despues,se genera el ruido gaussiano con la función random normal ya que genera valores aleatorios con distribución normal (valor medio, desviación o dispersión de los valores, tamaño del arreglo) si se aumenta el segundo valor, aumenta la dispersión y por lo tanto el ruido
++ Por ultimo,se suma la señal original con la del ruido.
+  
 ```python
 ## RUIDO GAUSSIANO CON DESVIACIÓN BAJA 0.5
 
@@ -173,6 +178,7 @@ plt.show()
 <br><em>Figura 3: señal original contaminada con Ruido Gaussiano con una amplitud baja .</em></p>
 
  2.Ruido Gaussiano alto
+ + Aqui se realiza el mismo procedimiento anterior, solo que se cambia la dispersión de los datos para que asi se genere mas ruido.
 ```python
 ## RUIDO GAUSSIANO CON DESVIACIÓN ALTA 50
 
@@ -201,6 +207,14 @@ plt.show()
 
 
 3.Ruido de impulso bajo 
+Este ruido genera ruidos en los picos grandes, positivos o negativos.
++ primero se toma los valores del dataframe y se convierten en un arreglo llamado señal2, en este caso.
++ Luego, se define la amplitud del ruido, es decir, los picos que va a tener, si se le aumenta el valor, el ruido va a ser mayor.
++ despues, se crea un vector vacío con solo 0 del tamaño de la señal2
+>*indices_impulso* es un vector modo booleano que asigna valores 1 o 0 (true or false), agrega el true solo al 30% de los datos>
++ Ahora al vector vacío llamado rimpulso, al 30% de valores true( lo hace *np.sum*) le va a asignar un valor random entre los valores elegidos para la amplitud
++ Finalmente, se suma la señal original con la generada del ruido.
+  
  ```python
 
 ##RUIDO DE IMPULSO CON AMPLITUD BAJA
@@ -230,10 +244,11 @@ plt.show()
 
 ```
 ![Ruido de Impulso Bajo](ruido_impulso_bajo.png)
-<br><em>Figura 4: señal original contaminada con Ruido de impulso con una amplitud baja.</em></p>
+<br><em>Figura 4: señal original contaminada con Ruido de impulso con una amplitud baja de 0.1mV.</em></p>
 
 
 4. Ruido de impulso alto
+Se realiza el mismo procedimiento, utilizzando una amplitud diferente, en este caso se utilizó 50mV.
 ```python
 ##RUIDO DE IMPULSO CON AMPLITUD ALTA
 # Copia de la señal original
@@ -262,9 +277,29 @@ plt.show()
 
 ```
 ![Ruido de Impulso Alto](ruido_impulso_alto.png)
-<br><em>Figura 4: señal original contaminada con Ruido de impulso con una amplitud alta.</em></p>
+<br><em>Figura 4: señal original contaminada con Ruido de impulso con una amplitud alta de 50mV.</em></p>
 
- 5. Ruido de tipo de artefacto bajo
+ 5. Ruido de tipo artefacto bajo
+    
+El ruido de tipo artefacto es un ruido generado por la interferencia electrica o del paciente, como los electrodos, ruidos fisiologicos,  eléctrica, movimiento del electrodo.[2]Este ruido puede provocar picos o distorsiones en la señal, que pueden afectar la precisión de los datos obtenidos.[3]
+
+>Este ruido consta de 2 ruidos incluidos:
+>+ *Ruido interferencia periodica (senoidal, fuentes eléctricas externas)*
+>+ *Ruido de transitorios aleatorios, picos de ruido(fisiologico)* 
+
+Teniendo en cuenta esto, se realizó lo siguiente:
++ Primero, se toma los valores del dataframe y se convierten en un arreglo llamado señal3, en este caso.
++ Se define una frecuencia, para esto importante conocer que en colombia la interferencia de la fuente electrica es de 60Hz
++ Se define la amplitud, en este caso se utilizó 0,005 mV.
+ >para que el ruido sea fuerte o leve se varia el valor de la amplitud (mayor amplitud, mayor ruido)
++ Se define la amplitud del transitorio y su probabilidad de que ocurra true or false
++ Se crea un vector de tiempo con las misma cantidad de posiciones que la de la señal
+ >*ruido_periodico* crea el ruido con forma senoidal con amplitud y frecuencia
++ Se crea un vector con ceros en donde indices transitorios creará valores aleatorios de true or false con una probabilidad predeterminada
+  REVISARRRRR
+#ahora dentro de ese vector se multiplica la amplitus determinada 
+#
+#se suman ambos ruidos y se agregan a la señal
 ```python
 ##RUIDO DE TIPO ARTEFACTO AMPLITUD BAJA
 # Copia de la señal original
@@ -384,6 +419,12 @@ De acuerdo a lo anterior, se obtuvieron lo siguiente :
 ## Referencias
 
 1.Qué es Señal-Ruido. Diccionario Médico. Clínica U. Navarra. (n.d.).https://www.cun.es. Retrieved February 5, 2025, from https://www.cun.es/diccionario-medico/terminos/senal-ruido [¹](https://www.cun.es/diccionario-medico/terminos/senal-ruido) 
+2. MR image quality and artifacts: signal to noise ratio. (n.d.). IMAIOS. Retrieved February 6, 2025, from https://www.imaios.com/en/e-mri/image-quality-and-artifacts/signal-to-noise-ratio
+3. (N.d.). Fastercapital.com. Retrieved February 6, 2025, from https://fastercapital.com/es/contenido/Artefactos-de-procesamiento-de-senales--desenmascarando-las-ondas-ilusorias.html#Tipos-de-artefactos-de-procesamiento-de-se-ales
+
+
+
+
 
 
 
