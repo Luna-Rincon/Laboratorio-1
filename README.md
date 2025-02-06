@@ -136,7 +136,9 @@ plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.show()
 ```
 Obteniendo lo siguiente :
+
 ![Histograma y PDF de semg RT HAM](Histograma_y_pdf_de_sEmg.png)
+
 <br><em>Figura 2: Histograma con función de probabilidad de la señal sEMG RT HAM .</em></p>
 
 ### SNR 
@@ -168,7 +170,7 @@ plt.show()
 
 ```
 ![Ruido Gaussiano Bajo](ruido_gaussiano_bajo.png)
-<br><em>Figura 3: señal original contaminada con Ruido Gaussiano con una amplitud baja de 0.5mV .</em></p>
+<br><em>Figura 3: señal original contaminada con Ruido Gaussiano con una amplitud baja .</em></p>
 
  2.Ruido Gaussiano alto
 ```python
@@ -305,7 +307,7 @@ plt.show()
 
 ```
 ![Ruido de Artefacto](ruido_artefacto_bajo.png)
-<br><em>Figura 3: señal original con Ruido de Artefacto  .</em></p>
+<br><em>Figura 3: señal original contaminada con Ruido de Artefacto con amplitud baja  .</em></p>
 
  6. Ruido de Artefacto alto
 ```python
@@ -348,19 +350,29 @@ plt.ylabel("Amplitud (mV)", fontsize=14)
 plt.grid(True, linestyle="--", alpha=0.7)
 plt.show()
 ```
-![Ruido Artefacto](ruido_artefacto alto.png)
-<br><em>Figura 7: señal original con Ruido Flicker  .</em></p>
+![Ruido Artefacto](ruido_artefacto_alto.png)
+<br><em>Figura 7: señal original contaminada con Ruido de Artefacto con amplitud alta .</em></p>
 
-A partir de lo anterior, se calculó el SNR de cada uno de los ruido de la siguiente manera 
+A partir de lo anterior, se calculó el SNR de cada uno de los ruido de la siguiente manera :
+
 ```python
+#CALCULAR EL SNR DE LA SEÑAL CON RUIDO GAUSSIANO bajo
+
 # Calcular la potencia de la señal y del ruido
 P_señal = np.mean(señalruidog ** 2)  # Potencia de la señal
 P_ruido = np.mean(rgauss ** 2)   # Potencia del ruido
 
 # Calcular SNR en decibeles (dB)
 SNRGauss = 10 * np.log10(P_señal / P_ruido)
-print("SNR señal ruido Gauss: " + str(SNRGauss) + " dB") 
+print("SNR señal ruido Gauss BAJO: " + str(SNRGauss) + " dB") 
 ```
+De acuerdo a lo anterior, se obtuvieron lo siguiente :
+
+**Resultados**
+|           | Ruido Gaussiano  | Ruido de Impulso| Ruido de Artefacto|
+|:-------:|:-----------------:|:----------:|:-----------------:|
+|_SNR con amplitud baja_|     30,351   | 49,554 |       38,738 |
+|_SNR con amplitud alta_|     0,449   | 1,343 |       0,403   |
 
 
 
