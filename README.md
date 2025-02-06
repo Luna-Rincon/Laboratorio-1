@@ -194,24 +194,91 @@ plt.grid(True, linestyle="--", alpha=0.7)
 plt.show()
 
 ```
-![Ruido de Impulso](ruido_de_impulso.png)
-<br><em>Figura 4: señal original contaminada con Ruido Gaussiano con una amplitud altade 0.5 mV.</em></p>
+![Ruido Gaussiano alto](ruido_gaussiano_alto.png)
+<br><em>Figura 3: señal original contaminada con Ruido Gaussiano con una amplitud alta .</em></p>
 
-2.Ruido de impulso bajo 
+
+3.Ruido de impulso bajo 
  ```python
+
+##RUIDO DE IMPULSO CON AMPLITUD BAJA
+# Copia de la señal original
+señal2 = df_rt['semg RT HAM'].values  
+amplitud=0.1
+
+# Generación de ruido de impulso
+rimpulso = np.zeros_like(señal2) # se crea un vector vacío con solo 0 del tamaño de la señal2
+indices_impulso = np.random.rand(len(señal2)) < 0.3   #0.3 es la probabilidad de impulso 30%
+rimpulso[indices_impulso] = np.random.choice([-amplitud, amplitud], np.sum(indices_impulso))
+
+# Señal con ruido de impulso
+señalruidoi = señal2 + rimpulso
+ 
+# Graficar
+plt.figure(figsize=(10, 4))
+plt.plot(señalruidoi, label="Señal + Ruido de Impulso", alpha=0.4, color='red')
+plt.legend()
+plt.title("Señal con ruido de Impulso BAJO")
+plt.xlabel("Tiempo (s)", fontsize=14)
+plt.ylabel("Amplitud (mV)", fontsize=14)
+
+# Agregar rejilla
+plt.grid(True, linestyle="--", alpha=0.7)
+plt.show()
+
+```
+![Ruido de Impulso Bajo](ruido_impulso_bajo.png)
+<br><em>Figura 4: señal original contaminada con Ruido de impulso con una amplitud baja.</em></p>
+
+
+4. Ruido de impulso alto
+```python
+##RUIDO DE IMPULSO CON AMPLITUD ALTA
+# Copia de la señal original
+señal2 = df_rt['semg RT HAM'].values  
+amplitud=50
+
+# Generación de ruido de impulso
+rimpulso2 = np.zeros_like(señal2) # se crea un vector vacío con solo 0 del tamaño de la señal2
+indices_impulso = np.random.rand(len(señal2)) < 0.3   #0.3 es la probabilidad de impulso 30%
+rimpulso2[indices_impulso] = np.random.choice([-amplitud, amplitud], np.sum(indices_impulso))
+
+# Señal con ruido de impulso
+señalruidoi2 = señal2 + rimpulso2
+
+# Graficar
+plt.figure(figsize=(10, 4))
+plt.plot(señalruidoi2, label="Señal + Ruido de Impulso", alpha=0.4, color='orange')
+plt.legend()
+plt.title("Señal con ruido de Impulso ALTO")
+plt.xlabel("Tiempo (s)", fontsize=14)
+plt.ylabel("Amplitud (mV)", fontsize=14)
+
+# Agregar rejilla
+plt.grid(True, linestyle="--", alpha=0.7)
+plt.show()
+
+```
+![Ruido de Impulso Alto](ruido_impulso_alto.png)
+<br><em>Figura 4: señal original contaminada con Ruido de impulso con una amplitud alta.</em></p>
+
+ 5. Ruido de tipo de artefacto bajo
+```python
+##RUIDO DE TIPO ARTEFACTO AMPLITUD BAJA
 # Copia de la señal original
 señal3 = df_rt['semg RT HAM'].values  
 
-# Parámetros del ruido tipo artefacto
-frecart = 50  # Frecuencia de la interferencia (en Hz)
-amplart = 0.1  # Amplitud de la interferencia
-muestras_transitorias = 50  # Duración de los transitorios (en muestras)
-ampltrans = 0.3  # Amplitud de los transitorios
-probtrans = 0.005  # Probabilidad de ocurrencia de transitorios
+# Parámetros del ruido tipo artefacto-fuente eléctrica
+frecart = 60  # Frecuencia de la interferencia (en Hz) en colombia la frecuencia es de 60Hz
+amplart = 0.005  # Amplitud de la interferencia
 
-# Generación de ruido tipo artefacto
+#Parámetros del ruido transitorio
+ampltrans = 0.3  # Amplitud de los transitorios
+probtrans = 0.4  # Probabilidad de ocurrencia de transitorios
+
+# Generación de ruido tipo periodico
 tiempo = np.arange(len(señal3))
-ruido_periodico = amplart * np.sin(2 * np.pi * frecart * tiempo / len(tiempo))
+ruido_periodico = amplart * np.sin(2 * np.pi * frecart * tiempo / len(tiempo))#crea el ruido en forme de señal senoidal =sen(2pi*frec*t)
 
 # Generación de transitorios
 ruido_transitorio = np.zeros_like(señal3)
@@ -222,115 +289,66 @@ ruido_transitorio[indices_transitorios] = ampltrans * np.random.randn(np.sum(ind
 rartefacto = ruido_periodico + ruido_transitorio
 
 # Señal con ruido tipo artefacto
-señalruidoartefacto = señal3 + rartefacto
-
-# Agregar al DataFrame sin warning
-df_rt.loc[:, 'Rartefacto'] = señalruidoartefacto  
+señalruidoartefacto = señal3 + rartefacto  
 
 # Graficar
 plt.figure(figsize=(10, 4))
-plt.plot(señalruidoartefacto, label="Señal + ruido tipo Artefacto", alpha=0.4, color='green')
+plt.plot(señalruidoartefacto, label="Señal + ruido tipo Artefacto", alpha=0.4, color='brown')
 plt.legend()
-plt.title("Señal con ruido tipo Artefacto")
+plt.title("Señal con ruido tipo Artefacto BAJO")
+plt.xlabel("Tiempo (s)", fontsize=14)
+plt.ylabel("Amplitud (mV)", fontsize=14)
 
 # Agregar rejilla
 plt.grid(True, linestyle="--", alpha=0.7)
 plt.show()
+
 ```
-![Ruido de Artefacto](ruido_artefacto.png)
+![Ruido de Artefacto](ruido_artefacto_bajo.png)
 <br><em>Figura 3: señal original con Ruido de Artefacto  .</em></p>
 
-3. Ruido de tipo de artefacto 
+ 6. Ruido de Artefacto alto
 ```python
+##RUIDO DE TIPO ARTEFACTO AMPLITUD ALTA
 # Copia de la señal original
-señal4 = df_rt['semg RT HAM'].values 
-# Parámetros del ruido uniforme
-amplitud_uniforme = 0.1  # Amplitud del ruido uniforme
+señal3 = df_rt['semg RT HAM'].values  
 
-# Generación de ruido uniforme
-runiforme = np.random.uniform(-amplitud_uniforme, amplitud_uniforme, len(señal4))
+# Parámetros del ruido tipo artefacto-fuente eléctrica
+frecart = 60  # Frecuencia de la interferencia (en Hz) en colombia la frecuencia es de 60Hz
+amplart = 60  # Amplitud de la interferencia
 
-# Señal con ruido uniforme
-señalruidouniforme = señal4 + runiforme
+#Parámetros del ruido transitorio
+ampltrans = 50  # Amplitud de los transitorios
+probtrans = 0.4  # Probabilidad de ocurrencia de transitorios
 
-# Agregar al DataFrame sin warning
-df_rt.loc[:, 'Runiforme'] = señalruidouniforme  
+# Generación de ruido tipo periodico
+tiempo = np.arange(len(señal3))
+ruido_periodico = amplart * np.sin(2 * np.pi * frecart * tiempo / len(tiempo))#crea el ruido en forme de señal senoidal =sen(2pi*frec*t)
+
+# Generación de transitorios
+ruido_transitorio = np.zeros_like(señal3)
+indices_transitorios = np.random.rand(len(señal3)) < probtrans
+ruido_transitorio[indices_transitorios] = ampltrans * np.random.randn(np.sum(indices_transitorios))
+
+# Combinación de ruido periódico y transitorio
+rartefacto2 = ruido_periodico + ruido_transitorio
+
+# Señal con ruido tipo artefacto
+señalruidoartefacto2 = señal3 + rartefacto2  
 
 # Graficar
 plt.figure(figsize=(10, 4))
-plt.plot(señalruidouniforme, label="Señal + Ruido Uniforme", alpha=0.4, color='purple')
+plt.plot(señalruidoartefacto2, label="Señal + ruido tipo Artefacto", alpha=0.4, color='black')
 plt.legend()
-plt.title("Señal con ruido Uniforme")
+plt.title("Señal con ruido tipo Artefacto ALTO")
+plt.xlabel("Tiempo (s)", fontsize=14)
+plt.ylabel("Amplitud (mV)", fontsize=14)
 
 # Agregar rejilla
 plt.grid(True, linestyle="--", alpha=0.7)
 plt.show()
 ```
-![Ruido Uniforme](ruido_uniforme.png)
-<br><em>Figura 5: señal original con Ruido Uniforme  .</em></p>
-
- 5.Ruido exponencial
-```python
-# Copia de la señal original
-señal5 = df_rt['semg RT HAM'].values 
-# Parámetros del ruido exponencial
-escala_exponencial = 0.05  # Parámetro de escala para la distribución exponencial
-
-# Generación de ruido exponencial
-rexponencial = np.random.exponential(escala_exponencial, len(señal5)) - escala_exponencial
-
-# Señal con ruido exponencial
-señalruidoexponencial = señal5 + rexponencial
-
-# Agregar al DataFrame sin warning
-df_rt.loc[:, 'Rexponencial'] = señalruidoexponencial  
-
-# Graficar
-plt.figure(figsize=(10, 4))
-plt.plot(señalruidoexponencial, label="Señal + Ruido Exponencial", alpha=0.4, color='orange')
-plt.legend()
-plt.title("Señal con ruido Exponencial")
-
-# Agregar rejilla
-plt.grid(True, linestyle="--", alpha=0.7)
-plt.show()
-```
-![Ruido Exponencial](ruido_exponencial.png)
-<br><em>Figura 6: señal original con Ruido Exponencial .</em></p>
-
- 6. Ruido flicker 1/F
-```python
-# Copia de la señal original
-señal6 = df_rt['semg RT HAM'].values # Parámetros del ruido de flicker
-beta = 1  # Exponente de la ley de potencia (1/f^beta)
-
-# Generación de ruido de flicker
-frecuencias = np.fft.fftfreq(len(señal6))
-espectro = 1 / (np.abs(frecuencias) ** (beta / 2) + 1e-10)  # Evitar división por cero
-espectro[0] = 0  # Eliminar componente DC
-ruido_flicker = np.fft.ifft(espectro * np.exp(1j * np.random.uniform(0, 2 * np.pi, len(señal6))))
-ruido_flicker = np.real(ruido_flicker)  # Tomar la parte real
-
-# Normalizar el ruido
-rflicker = ruido_flicker / np.max(np.abs(ruido_flicker)) * 0.1  # Ajustar amplitud
-
-# Señal con ruido de flicker
-señalruidoflicker = señal + rflicker
-
-# Agregar al DataFrame sin warning
-df_rt.loc[:, 'Rflicker'] = señalruidoflicker  
-
-# Graficar
-plt.figure(figsize=(10, 4))
-plt.plot(señalruidoflicker, label="Señal + Ruido de Flicker (1/f)", alpha=0.4, color='brown')
-plt.legend()
-plt.title("Señal con ruido de Flicker (1/f)")
-
-# Agregar rejilla
-plt.grid(True, linestyle="--", alpha=0.7)
-plt.show()
-```
-![Ruido Flicker](ruido_flicker.png)
+![Ruido Artefacto](ruido_artefacto alto.png)
 <br><em>Figura 7: señal original con Ruido Flicker  .</em></p>
 
 A partir de lo anterior, se calculó el SNR de cada uno de los ruido de la siguiente manera 
