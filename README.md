@@ -142,68 +142,63 @@ Obteniendo lo siguiente :
 ### SNR 
 
 Se contamina la señal con diferentes tipos de ruidos diferentes para medir la relación señal ruido. Esto es debido a que la SNR es relevante en la interpretacion de señales biomedicas ya que compara entre el nivel de un detalle deseado (la señal) y el nivel de detalles no deseados, generalmente interferencias o distorsiones (el ruido).La SNR es un indicador de calidad de la señal, donde un mayor valor sugiere una mejor calidad de la información obtenida, mientras que un valor menor podría indicar una dificultad para comprender la señal de interés del ruido de fondo[¹](#1).
-Se utilizaron 6 tipos de ruidos diferentes y se grafico la señal como se observa en los codigos 
+Se utilizaron 3 tipos de ruidos diferentes, en cada uno de estos se graficó dos veces la señal con una amplitud alta y una amplitud baja como se observa a continuación 
 
- 1. Ruido Gaussiano
+ 1. Ruido Gaussiano bajo
 ```python
+## RUIDO GAUSSIANO CON DESVIACIÓN BAJA 0.5
+
 # Copia de la señal original
 señal = df_rt['semg RT HAM'].values  
 
 # Generación de ruido Gaussiano
-rgauss = np.random.normal(0, 0.05, len(señal))  
-señalruidog = señal + rgauss  
-
-# Agregar al DataFrame sin warning
-df_rt.loc[:, 'Rgaussiano'] = señalruidog  
+rgauss = np.random.normal(0, 0.5, len(señal))  
+señalruidog = señal + rgauss   
 
 # Graficar
 plt.figure(figsize=(10, 4))
 plt.plot(señalruidog, label="Señal + Ruido Gaussiano", alpha=0.4)
 plt.legend()
-plt.title("Señal con ruido Gaussiano")
-
+plt.title("Señal con ruido Gaussiano BAJO")
+plt.xlabel("Tiempo (s)", fontsize=14)
+plt.ylabel("Amplitud (mV)", fontsize=14)
 # Agregar rejilla
 plt.grid(True, linestyle="--", alpha=0.7)
 plt.show()
 
 ```
-![Ruido Gaussiano](ruido_gaussiano.png)
-<br><em>Figura 3: señal original con Ruido Gaussiano  .</em></p>
+![Ruido Gaussiano Bajo](ruido_gaussiano_bajo.png)
+<br><em>Figura 3: señal original contaminada con Ruido Gaussiano con una amplitud baja de 0.5mV .</em></p>
 
-
- 2.Ruido de impulso
+ 2.Ruido Gaussiano alto
 ```python
+## RUIDO GAUSSIANO CON DESVIACIÓN ALTA 50
+
 # Copia de la señal original
-señal2 = df_rt['semg RT HAM'].values  
-amplitud=1
+señal = df_rt['semg RT HAM'].values  
 
-# Generación de ruido de impulso
-rimpulso = np.zeros_like(señal2)
-indices_impulso = np.random.rand(len(señal2)) < 0.3 #0.3 es la probabilidad de impulso 30%
-rimpulso[indices_impulso] = np.random.choice([-amplitud, amplitud], np.sum(indices_impulso))
-
-# Señal con ruido de impulso
-señalruidoi = señal2 + rimpulso
-
-# Agregar al DataFrame sin warning
-df_rt.loc[:, 'Rimpulso'] = señalruidoi 
+# Generación de ruido Gaussiano
+rgauss2 = np.random.normal(0, 50, len(señal))  
+señalruidog2 = señal + rgauss2   
 
 # Graficar
 plt.figure(figsize=(10, 4))
-plt.plot(señalruidoi, label="Señal + Ruido de Impulso", alpha=0.4, color='red')
+plt.plot(señalruidog2, label="Señal + Ruido Gaussiano", alpha=0.4, color='blue')
 plt.legend()
-plt.title("Señal con ruido de Impulso")
+plt.title("Señal con ruido Gaussiano ALTO")
+plt.xlabel("Tiempo (s)", fontsize=14)
+plt.ylabel("Amplitud (mV)", fontsize=14)
 
 # Agregar rejilla
 plt.grid(True, linestyle="--", alpha=0.7)
 plt.show()
+
 ```
 ![Ruido de Impulso](ruido_de_impulso.png)
-<br><em>Figura 4: señal original con Ruido de Impulso  .</em></p>
+<br><em>Figura 4: señal original contaminada con Ruido Gaussiano con una amplitud altade 0.5 mV.</em></p>
 
- 3. Ruido de tipo de artefacto 
-
-```python
+2.Ruido de impulso bajo 
+ ```python
 # Copia de la señal original
 señal3 = df_rt['semg RT HAM'].values  
 
@@ -245,7 +240,7 @@ plt.show()
 ![Ruido de Artefacto](ruido_artefacto.png)
 <br><em>Figura 3: señal original con Ruido de Artefacto  .</em></p>
 
- 4. Ruido uniforme
+3. Ruido de tipo de artefacto 
 ```python
 # Copia de la señal original
 señal4 = df_rt['semg RT HAM'].values 
