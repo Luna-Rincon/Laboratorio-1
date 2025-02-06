@@ -418,8 +418,10 @@ De acuerdo a lo anterior, se obtuvieron lo siguiente :
 ## Referencias
 
 1.Qué es Señal-Ruido. Diccionario Médico. Clínica U. Navarra. (n.d.).https://www.cun.es. Retrieved February 5, 2025, from https://www.cun.es/diccionario-medico/terminos/senal-ruido [¹](https://www.cun.es/diccionario-medico/terminos/senal-ruido) 
+
 2. MR image quality and artifacts: signal to noise ratio. (n.d.). IMAIOS. Retrieved February 6, 2025, from https://www.imaios.com/en/e-mri/image-quality-and-artifacts/signal-to-noise-ratio
-3. (N.d.). Fastercapital.com. Retrieved February 6, 2025, from https://fastercapital.com/es/contenido/Artefactos-de-procesamiento-de-senales--desenmascarando-las-ondas-ilusorias.html#Tipos-de-artefactos-de-procesamiento-de-se-ales
+   
+4. (N.d.). Fastercapital.com. Retrieved February 6, 2025, from https://fastercapital.com/es/contenido/Artefactos-de-procesamiento-de-senales--desenmascarando-las-ondas-ilusorias.html#Tipos-de-artefactos-de-procesamiento-de-se-ales
 
 
 
