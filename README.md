@@ -295,11 +295,9 @@ Teniendo en cuenta esto, se realizó lo siguiente:
 + Se define la amplitud del transitorio y su probabilidad de que ocurra true or false
 + Se crea un vector de tiempo con las misma cantidad de posiciones que la de la señal
  >*ruido_periodico* crea el ruido con forma senoidal con amplitud y frecuencia
-+ Se crea un vector con ceros en donde indices transitorios creará valores aleatorios de true or false con una probabilidad predeterminada
-  REVISARRRRR
-#ahora dentro de ese vector se multiplica la amplitus determinada 
-#
-#se suman ambos ruidos y se agregan a la señal
++ Se crea un vector con ceros en donde indices transitorios creará valores aleatorios de true or false con una probabilidad predeterminada, en nuestro caso el 40 % será true presentes en la *señal13* donde se almacenan en *indices_transitorios* 
++ Ahora dentro de *ruido_transitorio* se multiplica la amplitus determinada 
++ se suman ambos ruidos y se agregan a la señal
 ```python
 ##RUIDO DE TIPO ARTEFACTO AMPLITUD BAJA
 # Copia de la señal original
@@ -345,6 +343,7 @@ plt.show()
 <br><em>Figura 3: señal original contaminada con Ruido de Artefacto con amplitud baja  .</em></p>
 
  6. Ruido de Artefacto alto
+ Se realiza el mismo procedimiento, utilizando una amplitud diferente, en este caso se utilizó 60mV.
 ```python
 ##RUIDO DE TIPO ARTEFACTO AMPLITUD ALTA
 # Copia de la señal original
