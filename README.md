@@ -94,7 +94,7 @@ cv=(desviacion/media)*100
 print("Coeficiente de variación= "+str (cv))
 ```
 **Resultados**
-| Media | Desviación Estandar  | Varianza | Coeficiente Variación|
+| Media de datos | Desviación Estandar  | Varianza | Coeficiente Variación|
 |:-------:|:-----------------:|:----------:|:-----------------:|
 | 1.956 |      16.347     | 267.237  |       835.349   |
 
