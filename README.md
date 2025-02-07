@@ -149,9 +149,10 @@ Obteniendo lo siguiente :
 
 Se contamina la señal con diferentes tipos de ruidos diferentes para medir la relación señal ruido. Esto es debido a que la SNR es relevante en la interpretación de señales biomedicas ya que compara entre el nivel de un detalle deseado (la señal) y el nivel de detalles no deseados, generalmente interferencias o distorsiones (el ruido).La SNR es un indicador de calidad de la señal, donde un mayor valor sugiere una mejor calidad de la información obtenida, mientras que un valor menor podría indicar una dificultad para comprender la señal de interés del ruido de fondo[¹](#1).Por otra parte, la SNR es igual a la relacion entre la intensidad promedio de la señla y la desviacion estandar el ruido.[2]
 
-Se utilizaron 3 tipos de ruidos diferentes, en cada uno de estos se graficó dos veces la señal con una amplitud alta y una amplitud baja como se observa a continuación 
+Se emplearon tres tipos diferentes de ruido, y para cada uno se realizaron pruebas con dos niveles de intensidad: ruido bajo y ruido alto, como se muestra a continuación.
 
- 1. Ruido Gaussiano bajo
+ 1. Ruido Gaussiano
+    1.1 Ruido Gaussiano bajo
 Este ruido es el mas importante en la rama estadistica ya que su curva indica la mayor exatitud los fenomenos que suceden en la naturaleza, como es el ruido de una imagen[4]
 + Primero, se extrae la columna del data frame y se convierten los valores a un arreglo con *.values*, el cual se va a llamar señal
 + Despues,se genera el ruido gaussiano con la función random normal ya que genera valores aleatorios con distribución normal (valor medio, desviación o dispersión de los valores, tamaño del arreglo) si se aumenta el segundo valor, aumenta la dispersión y por lo tanto el ruido
