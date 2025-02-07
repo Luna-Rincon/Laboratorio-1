@@ -148,6 +148,7 @@ Se contamina la señal con diferentes tipos de ruidos diferentes para medir la r
 Se utilizaron 3 tipos de ruidos diferentes, en cada uno de estos se graficó dos veces la señal con una amplitud alta y una amplitud baja como se observa a continuación 
 
  1. Ruido Gaussiano bajo
+Este ruido es el mas importante en la rama estadistica ya que su curva indica la mayor exatitud los fenomenos que suceden en la naturaleza, como es el ruido de una imagen[4]
 + Primero, se extrae la columna del data frame y se convierten los valores a un arreglo con *.values*, el cual se va a llamar señal
 + Despues,se genera el ruido gaussiano con la función random normal ya que genera valores aleatorios con distribución normal (valor medio, desviación o dispersión de los valores, tamaño del arreglo) si se aumenta el segundo valor, aumenta la dispersión y por lo tanto el ruido
 + Por ultimo,se suma la señal original con la del ruido.
@@ -207,7 +208,7 @@ plt.show()
 
 
 3.Ruido de impulso bajo 
-Este ruido genera ruidos en los picos grandes, positivos o negativos.
+Este ruido genera ruidos en los picos grandes, positivos o negativos que aparecen ineperadamente y no siguen un patron.
 + primero se toma los valores del dataframe y se convierten en un arreglo llamado señal2, en este caso.
 + Luego, se define la amplitud del ruido, es decir, los picos que va a tener, si se le aumenta el valor, el ruido va a ser mayor.
 + despues, se crea un vector vacío con solo 0 del tamaño de la señal2
@@ -248,7 +249,7 @@ plt.show()
 
 
 4. Ruido de impulso alto
-Se realiza el mismo procedimiento, utilizzando una amplitud diferente, en este caso se utilizó 50mV.
+Se realiza el mismo procedimiento, utilizando una amplitud diferente, en este caso se utilizó 50mV.
 ```python
 ##RUIDO DE IMPULSO CON AMPLITUD ALTA
 # Copia de la señal original
@@ -422,6 +423,11 @@ De acuerdo a lo anterior, se obtuvieron lo siguiente :
 2. MR image quality and artifacts: signal to noise ratio. (n.d.). IMAIOS. Retrieved February 6, 2025, from https://www.imaios.com/en/e-mri/image-quality-and-artifacts/signal-to-noise-ratio
    
 4. (N.d.). Fastercapital.com. Retrieved February 6, 2025, from https://fastercapital.com/es/contenido/Artefactos-de-procesamiento-de-senales--desenmascarando-las-ondas-ilusorias.html#Tipos-de-artefactos-de-procesamiento-de-se-ales
+5. MR image quality and artifacts: signal to noise ratio. (n.d.). IMAIOS. Retrieved February
+6. (N.d.-c). Edu.Ec. Retrieved February 7, 2025, from https://dspace.ups.edu.ec/handle/123456789/20394
+
+
+
 
 
 
