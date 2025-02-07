@@ -143,6 +143,7 @@ Obteniendo lo siguiente :
 
 
 + La forma de la distribución es aproximadamente simétrica alrededor de cero, lo cual es una característica de la distribución normal.
+  
 + La mayor parte de los datos están concentrados en un rango estrecho, similar a la campana de Gauss.
 
 ## Relación señal/ruido 
