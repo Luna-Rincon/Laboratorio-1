@@ -1,7 +1,7 @@
 # Análisis estadístico de señal EMG en músculo Isquiotibial
 
 ## Descripción
-En el presente laboratorio se realiza un análisis estadístico de una señal fisiológica del músculo isquitibial con el objetivo de identificar los estadisticos descriptivos. Para ello, se descarga 
+En el presente laboratorio se realiza un análisis estadístico de una señal fisiológica del músculo isquitiobial con el objetivo de identificar los estadisticos descriptivos. Para ello, se descarga 
 la señal desde una base de datos, llamada physionet, se procesa y se implementa lenguaje de porgramación **Python**. Se programa manualmente y con funciones predeterminadas de la libreria de **numpy** para el calculo. Adicionalmente, se contamina la señal con distintos tipos de ruido para medir su impacto en la señal.
 
 ## Tener en cuenta
@@ -142,8 +142,8 @@ Obteniendo lo siguiente :
 <br><em>Figura 2: Histograma con función de probabilidad de la señal sEMG RT HAM .</em></p>
 
 
-+La forma de la distribución es aproximadamente simétrica alrededor de cero, lo cual es una característica de la distribución normal.
-+La mayor parte de los datos están concentrados en un rango estrecho, similar a la campana de Gauss.
++ La forma de la distribución es aproximadamente simétrica alrededor de cero, lo cual es una característica de la distribución normal.
++ La mayor parte de los datos están concentrados en un rango estrecho, similar a la campana de Gauss.
 
 ## Relación señal/ruido 
 
@@ -151,9 +151,10 @@ Se contamina la señal con diferentes tipos de ruidos diferentes para medir la r
 
 Se emplearon tres tipos diferentes de ruido, y para cada uno se realizaron pruebas con dos niveles de intensidad: ruido bajo y ruido alto, como se muestra a continuación.
 
- 1. Ruido Gaussiano
-    1.1 Ruido Gaussiano bajo
-Este ruido es el mas importante en la rama estadistica ya que su curva indica la mayor exatitud los fenomenos que suceden en la naturaleza, como es el ruido de una imagen[4]
+ + 1. Ruido Gaussiano
++ El ruido gaussiano es un tipo de ruido aleatorio cuya distribución de amplitud sigue una curva normal o gaussiana, es el mas importante en la rama estadistica ya que su curva indica la mayor exatitud los fenomenos que suceden en la naturaleza.
+    
++ 1.1 Ruido Gaussiano bajo
 + Primero, se extrae la columna del data frame y se convierten los valores a un arreglo con *.values*, el cual se va a llamar señal
 + Despues,se genera el ruido gaussiano con la función random normal ya que genera valores aleatorios con distribución normal (valor medio, desviación o dispersión de los valores, tamaño del arreglo) si se aumenta el segundo valor, aumenta la dispersión y por lo tanto el ruido
 + Por ultimo,se suma la señal original con la del ruido.
@@ -183,7 +184,7 @@ plt.show()
 ![Ruido Gaussiano Bajo](ruido_gaussiano_bajo.png)
 <br><em>Figura 3: señal original contaminada con Ruido Gaussiano con una amplitud baja .</em></p>
 
- 2.Ruido Gaussiano alto
+ + 1.2 Ruido Gaussiano alto
  + Aqui se realiza el mismo procedimiento anterior, solo que se cambia la dispersión de los datos para que asi se genere mas ruido.
 ```python
 ## RUIDO GAUSSIANO CON DESVIACIÓN ALTA 50
@@ -211,12 +212,13 @@ plt.show()
 ![Ruido Gaussiano alto](ruido_gaussiano_alto.png)
 <br><em>Figura 3: señal original contaminada con Ruido Gaussiano con una amplitud alta .</em></p>
 
-
-3.Ruido de impulso bajo 
++ 2. Ruido de impulso
+El ruido de impulso consiste en picos de alta intensidad que aparecen de manera abrupta en una señal, alterando valores específicos sin afectar el resto. Es característico de interferencias eléctricas o fallos en la transmisión de datos.
++ 2.1 .Ruido de impulso bajo 
 Este ruido genera ruidos en los picos grandes, positivos o negativos que aparecen ineperadamente y no siguen un patron.
-+ primero se toma los valores del dataframe y se convierten en un arreglo llamado señal2, en este caso.
++ Primero se toma los valores del dataframe y se convierten en un arreglo llamado señal2, en este caso.
 + Luego, se define la amplitud del ruido, es decir, los picos que va a tener, si se le aumenta el valor, el ruido va a ser mayor.
-+ despues, se crea un vector vacío con solo 0 del tamaño de la señal2
++ Después, se crea un vector vacío con solo 0 del tamaño de la señal2
 >*indices_impulso* es un vector modo booleano que asigna valores 1 o 0 (true or false), agrega el true solo al 30% de los datos>
 + Ahora al vector vacío llamado rimpulso, al 30% de valores true( lo hace *np.sum*) le va a asignar un valor random entre los valores elegidos para la amplitud
 + Finalmente, se suma la señal original con la generada del ruido.
@@ -253,7 +255,7 @@ plt.show()
 <br><em>Figura 4: señal original contaminada con Ruido de impulso con una amplitud baja de 0.1mV.</em></p>
 
 
-4. Ruido de impulso alto
+  + 2.2 Ruido de impulso alto
 Se realiza el mismo procedimiento, utilizando una amplitud diferente, en este caso se utilizó 50mV.
 ```python
 ##RUIDO DE IMPULSO CON AMPLITUD ALTA
@@ -285,7 +287,9 @@ plt.show()
 ![Ruido de Impulso Alto](ruido_impulso_alto.png)
 <br><em>Figura 4: señal original contaminada con Ruido de impulso con una amplitud alta de 50mV.</em></p>
 
- 5. Ruido de tipo artefacto bajo
+ + 3. Ruido de tipo artefacto 
+ El ruido tipo artefacto es cualquier señal no deseada que distorsiona la medición original y proviene de fuentes externas al sistema. En señales biomédicas, puede deberse al movimiento del paciente, actividad muscular o interferencia de equipos.
+ + 3.1 Ruido de tipo artefacto bajo
     
 El ruido de tipo artefacto es un ruido generado por la interferencia electrica o del paciente, como los electrodos, ruidos fisiologicos,  eléctrica, movimiento del electrodo.[2]Este ruido puede provocar picos o distorsiones en la señal, que pueden afectar la precisión de los datos obtenidos.[3]
 
@@ -348,7 +352,7 @@ plt.show()
 ![Ruido de Artefacto](ruido_artefacto_bajo.png)
 <br><em>Figura 3: señal original contaminada con Ruido de Artefacto con amplitud baja  .</em></p>
 
- 6. Ruido de Artefacto alto
+ + 3.2 Ruido de Artefacto alto
  Se realiza el mismo procedimiento, utilizando una amplitud diferente, en este caso se utilizó 60mV.
 ```python
 ##RUIDO DE TIPO ARTEFACTO AMPLITUD ALTA
@@ -415,7 +419,8 @@ De acuerdo a lo anterior, se obtuvieron lo siguiente :
 |_SNR con amplitud alta_|     0,449   | 1,343 |       0,403   |
 
 
-
+## Conclusiones
++ Calculados los datos estadísticos la media, desviación estándar, varianza y coeficiente de variación de la señal EMG del músculo isquiotibial para caracterizar su comportamiento y dispersión, observamos que la distribución de los valores es aproximadamente 
 
 
 
@@ -430,6 +435,8 @@ De acuerdo a lo anterior, se obtuvieron lo siguiente :
 4. (N.d.). Fastercapital.com. Retrieved February 6, 2025, from https://fastercapital.com/es/contenido/Artefactos-de-procesamiento-de-senales--desenmascarando-las-ondas-ilusorias.html#Tipos-de-artefactos-de-procesamiento-de-se-ales
 5. MR image quality and artifacts: signal to noise ratio. (n.d.). IMAIOS. Retrieved February
 6. (N.d.-c). Edu.Ec. Retrieved February 7, 2025, from https://dspace.ups.edu.ec/handle/123456789/20394
+
+   
 
 
 
