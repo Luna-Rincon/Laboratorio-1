@@ -143,7 +143,6 @@ Obteniendo lo siguiente :
 
 
 + La forma de la distribución es aproximadamente simétrica alrededor de cero, lo cual es una característica de la distribución normal.
-  
 + La mayor parte de los datos están concentrados en un rango estrecho, similar a la campana de Gauss.
 
 ## Relación señal/ruido 
@@ -153,7 +152,7 @@ Se contamina la señal con diferentes tipos de ruidos diferentes para medir la r
 Se emplearon tres tipos diferentes de ruido, y para cada uno se realizaron pruebas con dos niveles de intensidad: ruido bajo y ruido alto, como se muestra a continuación.
 
  + 1. Ruido Gaussiano
-+ El ruido gaussiano es un tipo de ruido aleatorio cuya distribución de amplitud sigue una curva normal o gaussiana, es el mas importante en la rama estadistica ya que su curva indica la mayor exatitud los fenomenos que suceden en la naturaleza.
++ El ruido gaussiano es un tipo de ruido aleatorio cuya distribución de amplitud sigue una curva normal o gaussiana, es el mas importante en la rama estadistica ya que su curva indica la mayor exatitud los fenomenos que suceden en la naturaleza. [7]
     
 + 1.1 Ruido Gaussiano bajo
 + Primero, se extrae la columna del data frame y se convierten los valores a un arreglo con *.values*, el cual se va a llamar señal
@@ -214,7 +213,7 @@ plt.show()
 <br><em>Figura 3: señal original contaminada con Ruido Gaussiano con una amplitud alta .</em></p>
 
 + 2. Ruido de impulso
-El ruido de impulso consiste en picos de alta intensidad que aparecen de manera abrupta en una señal, alterando valores específicos sin afectar el resto. Es característico de interferencias eléctricas o fallos en la transmisión de datos.
+El ruido de impulso consiste en picos de alta intensidad que aparecen de manera abrupta en una señal, alterando valores específicos sin afectar el resto. Es característico de interferencias eléctricas o fallos en la transmisión de datos. [8]
 + 2.1 .Ruido de impulso bajo 
 Este ruido genera ruidos en los picos grandes, positivos o negativos que aparecen ineperadamente y no siguen un patron.
 + Primero se toma los valores del dataframe y se convierten en un arreglo llamado señal2, en este caso.
@@ -289,11 +288,11 @@ plt.show()
 <br><em>Figura 4: señal original contaminada con Ruido de impulso con una amplitud alta de 50mV.</em></p>
 
  + 3. Ruido de tipo artefacto 
- El ruido tipo artefacto es cualquier señal no deseada que distorsiona la medición original y proviene de fuentes externas al sistema. En señales biomédicas, puede deberse al movimiento del paciente, actividad muscular o interferencia de equipos.
- + 3.1 Ruido de tipo artefacto bajo
-    
+ El ruido tipo artefacto es cualquier señal no deseada que distorsiona la medición original y proviene de fuentes externas al sistema. En señales biomédicas, puede deberse al movimiento del paciente, actividad muscular o interferencia de equipos. [9]
 El ruido de tipo artefacto es un ruido generado por la interferencia electrica o del paciente, como los electrodos, ruidos fisiologicos,  eléctrica, movimiento del electrodo.[2]Este ruido puede provocar picos o distorsiones en la señal, que pueden afectar la precisión de los datos obtenidos.[3]
 
+ + 3.1 Ruido de tipo artefacto bajo
+    
 >Este ruido consta de 2 ruidos incluidos:
 >+ *Ruido interferencia periodica (senoidal, fuentes eléctricas externas)*
 >+ *Ruido de transitorios aleatorios, picos de ruido(fisiologico)* 
@@ -398,7 +397,9 @@ plt.show()
 ![Ruido Artefacto](ruido_artefacto_alto.png)
 <br><em>Figura 7: señal original contaminada con Ruido de Artefacto con amplitud alta .</em></p>
 
-A partir de lo anterior, se calculó el SNR de cada uno de los ruido de la siguiente manera :
++ 4. SNR
++ El SNR es la relación señal-ruido, una medida que compara el nivel de la señal útil (en este caso, la señal EMG) con el nivel del ruido que la acompaña. Un SNR alto indica que la señal es más clara y que el ruido es relativamente bajo, lo que facilita su interpretación. Por el contrario, un SNR bajo significa que el ruido es más dominante, lo que puede dificultar la detección precisa de la señal y afectar los análisis posteriores. [10]
++ A partir de lo anterior, se calculó el SNR de cada uno de los ruido de la siguiente manera :
 
 ```python
 #CALCULAR EL SNR DE LA SEÑAL CON RUIDO GAUSSIANO bajo
@@ -421,12 +422,11 @@ De acuerdo a lo anterior, se obtuvieron lo siguiente :
 
 
 ## Conclusiones
-+ Calculados los datos estadísticos la media, desviación estándar, varianza y coeficiente de variación de la señal EMG del músculo isquiotibial para caracterizar su comportamiento y dispersión, observamos que la distribución de los valores es aproximadamente 
++ Calculados los datos estadísticos la media, valor máximo, desviación estándar, varianza y coeficiente de variación de la señal EMG del músculo isquiotibial para caracterizar su comportamiento y dispersión, se observa que la distribución de los valores está bastante alejada de la media. Por ello, el coeficiente de variación presenta un porcentaje alto, esto se debe a que se trata de una señal electromiográfica que presenta, además de variaciones en la actividad muscular, ruido y un no filtrado.
++ Se añadieron 3 diferentes tipos de ruido a la señal EMG original Gaussiano, Impulso y Artefacto, en dos niveles de intensidad (bajo y alto). El ruido tipo gaussiano afecta toda la señal de manera uniforme, aumentando su variabilidad y haciendo más difícil identificar los picos musculares. El ruido tipo impulso provoca picos bruscos en toda la señal, genera confusión en la detección de la actividad muscular. Por otro último, el ruido tipo artefacto imita interferencias externas con una mezcla de señales periódicas y transitorias, lo que afecta la estabilidad de la señal. Todos los ruidos generan interferencias sobre la señal original, lo que dificulta la interpretación de la misma.
++ Una vez añadidos los ruidos fue calculado el SNR para cada uno de ellos, observamos que la teoría coincidió con la práctica, efectivamente un ruido alto genera un SNR bajo porque la señal está muy cercana a la del ruido, y un ruido bajo genera un SNR alto, porque el ruido se encuentra alejado de la señal original.
 
-
-
-
-
+  
 ## Referencias
 
 1.Qué es Señal-Ruido. Diccionario Médico. Clínica U. Navarra. (n.d.).https://www.cun.es. Retrieved February 5, 2025, from https://www.cun.es/diccionario-medico/terminos/senal-ruido [¹](https://www.cun.es/diccionario-medico/terminos/senal-ruido) 
@@ -436,6 +436,10 @@ De acuerdo a lo anterior, se obtuvieron lo siguiente :
 4. (N.d.). Fastercapital.com. Retrieved February 6, 2025, from https://fastercapital.com/es/contenido/Artefactos-de-procesamiento-de-senales--desenmascarando-las-ondas-ilusorias.html#Tipos-de-artefactos-de-procesamiento-de-se-ales
 5. MR image quality and artifacts: signal to noise ratio. (n.d.). IMAIOS. Retrieved February
 6. (N.d.-c). Edu.Ec. Retrieved February 7, 2025, from https://dspace.ups.edu.ec/handle/123456789/20394
+7. El ruido gaussiano. (s. f.). https://media4.obspm.fr/public/VAU/instrumentacion/observar/analizar/ruido-gaussiano/APPRENDRE.html
+8. artefactos sonoros. (s. f.). Tesauro de Arte & Arquitectura. https://www.aatespanol.cl/terminos/300041619
+9. Svantek. (2023, 27 septiembre). Ruido de impulso | ¿Cómo medir? | Consultores Svantek. SVANTEK - Sound And Vibration. https://svantek.com/es/servicios/ruido-de-impulso/
+10. Sheldon, R., & Burke, J. (2021, 24 agosto). signal-to-noise ratio (S/N or SNR). Search Networking. https://www.techtarget.com/searchnetworking/definition/signal-to-noise-ratio
 
    
 
