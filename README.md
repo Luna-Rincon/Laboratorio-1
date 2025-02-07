@@ -141,6 +141,10 @@ Obteniendo lo siguiente :
 
 <br><em>Figura 2: Histograma con función de probabilidad de la señal sEMG RT HAM .</em></p>
 
+
++La forma de la distribución es aproximadamente simétrica alrededor de cero, lo cual es una característica de la distribución normal.
++La mayor parte de los datos están concentrados en un rango estrecho, similar a la campana de Gauss.
+
 ## Relación señal/ruido 
 
 Se contamina la señal con diferentes tipos de ruidos diferentes para medir la relación señal ruido. Esto es debido a que la SNR es relevante en la interpretación de señales biomedicas ya que compara entre el nivel de un detalle deseado (la señal) y el nivel de detalles no deseados, generalmente interferencias o distorsiones (el ruido).La SNR es un indicador de calidad de la señal, donde un mayor valor sugiere una mejor calidad de la información obtenida, mientras que un valor menor podría indicar una dificultad para comprender la señal de interés del ruido de fondo[¹](#1).Por otra parte, la SNR es igual a la relacion entre la intensidad promedio de la señla y la desviacion estandar el ruido.[2]
